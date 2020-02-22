@@ -19,7 +19,10 @@
 
     <h1>Fehlstundenentschuldigungsformulargenerator</h1>
 
+    <!--container lays out two columns for each part-->
     <div class="container">
+
+        <!--all the inputs with labels-->
         <div class="inputs">
             <div>
                 <h2>Geschlecht</h2>
@@ -49,6 +52,8 @@
 
         </div>
 
+        <!--preview of the later print-->
+        <!--the spans are placeholder for the inputs-->
         <div class="preview">
             <h2>Preview</h2>
             <span class="current-date"></span>
@@ -74,39 +79,43 @@
 
 
 <script>
-    $('document').ready(function () {
-        $('date-end').val
-    });
 
+    //on change of gender fill in the new value to the span
     $('input[name="gender"]').change(function () {
         $('.display-gender').text($('input[name="gender"]:checked').val());
     });
 
+    //on change of gender fill in the new value to the span
     $('#name').change(function () {
         $('.display-name').text($('#name').val());
     });
 
+        //on change of gender fill in the new value to the span
     $('#date-begin').change(function () {
         $('.display-begin-date').text(moment($('#date-begin').val()).format("DD/MM/YYYY"));
     });
 
+        //on change of gender fill in the new value to the span
     $('#date-end').change(function () {
         $('.display-end-date').text(moment($('#date-end').val()).format("DD/MM/YYYY"));
     });
 
+        //on change of gender fill in the new value to the span
     $('#reason').keyup(function () {
         $('.display-reason').text($('#reason').val());
     });
 
+        //on change of gender fill in the new value to the span
     $('#parent-name').change(function () {
         $('.display-parent-name').text($('#parent-name').val());
     });
 
+    //setting current date for date end date picker, header and corresponding span
     $('#date-end').val(moment().format("YYYY-MM-DD"));
     $('.display-end-date').text(moment($('#date-end').val()).format("DD/MM/YYYY"));
     $('.current-date').text(moment().format("DD/MM/YYYY"));
 
-
+    //checks whether all inputs have been made before printing
     window.onbeforeprint = function () {
         if (!$('input[name="gender"]:checked').val() || !$('#name').val() || !$('#date-begin').val() || !$('#reason').val() || !$('#parent-name').val()) {
             alert("Achtung! Es wurden nicht alle Felder ausgefüllt.");
