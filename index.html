@@ -8,12 +8,111 @@
     <link rel="stylesheet" href="index.css">
     <meta charset="utf-8">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="moment.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Barlow:300,400,500,700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
+    <h1>Fehlstundenentschuldigungsformulargenerator</h1>
+
+    <div class="container">
+        <div class="inputs">
+            <div>
+                <h2>Geschlecht</h2>
+                <label><input type="radio" id="male" name="gender" value="meines Sohnes">männlich</label>
+                <label><input type="radio" id="female" name="gender" value="meiner Tochter">weiblich</label>
+            </div>
+
+            <div>
+                <h2>Name</h2>
+                <input type="text" id="name" placeholder="Name">
+            </div>
+
+            <div>
+                <h2>Datum</h2>
+                <input type="date" id="date-begin"> bis <input type="date" id="date-end">
+            </div>
+
+            <div>
+                <h2>Grund</h2>
+                <textarea id="reason" cols="50" rows="4" placeholder="Grund des Fehlens"></textarea>
+            </div>
+
+            <div>
+                <h2>Name Erziehungsberechtigter</h2>
+                <input type="text" id="parent-name" placeholder="Erziehungsberechtigter">
+            </div>
+
+        </div>
+
+        <div class="preview">
+            <h2>Preview</h2>
+            <span class="current-date"></span>
+            <p>Sehr geehrte Damen und Herren,</p>
+            <p>leider muss ich das Fehlen <span class="display-gender"></span> für den Zeitraum vom <span
+                    class="display-begin-date"></span>
+                bis <span class="display-end-date"></span> entschuldigen. <span class="display-name"></span> konnte
+                aufgrund <span class="display-reason"></span> nicht am Unterricht teilnehmen.</p>
+            <br>
+            <br>
+            <p>Mit freundlichen Grüßen</p>
+            <br>
+            <br>
+            <br>
+            <p><span class="display-parent-name"></span></p>
+            <div class="footer">
+                <p>powered by </p>
+                <img src="XU-Exponential-University-of-Applied-Sciences-Logo-RGB.png">
+            </div>
+        </div>
+    </div>
 </body>
+
+
+<script>
+    $('document').ready(function () {
+        $('date-end').val
+    });
+
+    $('input[name="gender"]').change(function () {
+        $('.display-gender').text($('input[name="gender"]:checked').val());
+    });
+
+    $('#name').change(function () {
+        $('.display-name').text($('#name').val());
+    });
+
+    $('#date-begin').change(function () {
+        $('.display-begin-date').text(moment($('#date-begin').val()).format("DD/MM/YYYY"));
+    });
+
+    $('#date-end').change(function () {
+        $('.display-end-date').text(moment($('#date-end').val()).format("DD/MM/YYYY"));
+    });
+
+    $('#reason').keyup(function () {
+        $('.display-reason').text($('#reason').val());
+    });
+
+    $('#parent-name').change(function () {
+        $('.display-parent-name').text($('#parent-name').val());
+    });
+
+    $('#date-end').val(moment().format("YYYY-MM-DD"));
+    $('.display-end-date').text(moment($('#date-end').val()).format("DD/MM/YYYY"));
+    $('.current-date').text(moment().format("DD/MM/YYYY"));
+
+
+    window.onbeforeprint = function () {
+        if (!$('input[name="gender"]:checked').val() || !$('#name').val() || !$('#date-begin').val() || !$('#reason').val() || !$('#parent-name').val()) {
+            alert("Achtung! Es wurden nicht alle Felder ausgefüllt.");
+        }
+        console.log($('input[name="gender"]:checked').length == 0)
+    }
+</script>
 
 </html>

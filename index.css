@@ -1,0 +1,75 @@
+html{
+    font-family: Barlow;
+}
+
+span:empty {
+    background-color: rgb(230, 68, 47);
+    width: 100px;
+    display: inline-block;
+    height: 1rem;
+}
+
+h1{
+    text-align: center;
+    font-size: 2.3em;
+    font-weight: 700;
+}
+
+h2{
+    font-weight: 500;
+}
+
+.container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.preview{
+    width: 30em;
+}
+
+.current-date{
+    width: 100%;
+    text-align: right;
+    display: block;
+}
+
+.footer{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    float: right;
+}
+
+.footer img{
+    height: 100%;
+    margin-left: 20px;
+}
+
+
+@media print {
+    @page {
+        margin: 0; 
+    }
+
+    html{
+        font-size: 10pt;
+    }
+
+    body {
+        margin: 1.6cm; 
+    }
+
+    span:empty{
+        width: 0px;
+    }
+
+    h1, h2{
+        display: none;
+    }
+
+    .inputs{
+        display: none;
+    }
+
+}
